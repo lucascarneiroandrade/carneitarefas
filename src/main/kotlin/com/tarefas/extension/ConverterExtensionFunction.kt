@@ -1,6 +1,6 @@
 package com.tarefas.extension
 
-import com.tarefas.TarefaStatusEnum
+import com.tarefas.enums.TarefaStatusEnum
 import com.tarefas.model.TarefaModel
 import com.tarefas.request.PostTarefaRequest
 import com.tarefas.request.PutTarefaRequest

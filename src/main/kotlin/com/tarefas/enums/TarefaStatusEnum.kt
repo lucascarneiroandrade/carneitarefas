@@ -1,4 +1,4 @@
-package com.tarefas
+package com.tarefas.enums
 
 enum class TarefaStatusEnum {
 

@@ -1,6 +1,6 @@
 package com.tarefas.model
 
-import com.tarefas.TarefaStatusEnum
+import com.tarefas.enums.TarefaStatusEnum
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
