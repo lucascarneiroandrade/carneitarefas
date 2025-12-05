@@ -21,10 +21,8 @@ data class TarefaModel(
     @Enumerated(EnumType.STRING)
     var status: TarefaStatusEnum,
 
-    @Column(name = "criadoEm")
     var criadoEm: LocalDateTime,
 
-    @Column(name = "atualizadoEm")
     var atualizadoEm: LocalDateTime?
 
 
