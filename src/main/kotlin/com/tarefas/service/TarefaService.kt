@@ -25,7 +25,7 @@ class TarefaService(
         tarefaRepository.save(tarefa)
     }
 
-    fun atualizar(id: Int, request: PutTarefaRequest){
+    fun atualizar(request: PutTarefaRequest,id: Int){
         val tarefaDB = listarPorId(id)
         val tarefaRQ = request.atualizarTarefa(tarefaDB)
 
@@ -40,6 +40,7 @@ class TarefaService(
 
     fun listarPorUsuario(id: Int): List<GetTarefaResponse> {
         val usuario = usuarioService.listarPorId(id)
+
         return tarefaRepository.findByUsuarioId(usuario).map { it.converterParaResponse() }
     }
 

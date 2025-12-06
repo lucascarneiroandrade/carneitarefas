@@ -1,6 +1,5 @@
 package com.tarefas.controller
 
-import com.tarefas.extension.criarTarefa
 import com.tarefas.model.TarefaModel
 import com.tarefas.request.GetTarefaResponse
 import com.tarefas.request.PostTarefaRequest
@@ -25,7 +24,7 @@ class TarefaController(
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun atualizar(@RequestBody request: PutTarefaRequest, @PathVariable id: Int){
-        return tarefaService.atualizar(id, request)
+        return tarefaService.atualizar(request, id)
     }
 
     @GetMapping("/{id}")
