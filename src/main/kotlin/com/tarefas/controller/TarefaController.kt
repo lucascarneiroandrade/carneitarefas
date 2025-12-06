@@ -23,8 +23,8 @@ class TarefaController(
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun atualizar(@RequestBody request: PutTarefaRequest, @PathVariable id: Int){
-        return tarefaService.atualizar(request, id)
+    fun atualizar(@PathVariable id: Int, @RequestBody request: PutTarefaRequest){
+        return tarefaService.atualizar(id, request)
     }
 
     @GetMapping("/{id}")

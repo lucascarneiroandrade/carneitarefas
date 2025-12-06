@@ -9,6 +9,7 @@ import com.tarefas.request.GetTarefaResponse
 import com.tarefas.request.PostTarefaRequest
 import com.tarefas.request.PutTarefaRequest
 import org.springframework.stereotype.Service
+import org.springframework.web.bind.annotation.RequestBody
 
 
 @Service
@@ -25,7 +26,7 @@ class TarefaService(
         tarefaRepository.save(tarefa)
     }
 
-    fun atualizar(request: PutTarefaRequest,id: Int){
+    fun atualizar(id: Int, request: PutTarefaRequest){
         val tarefaDB = listarPorId(id)
         val tarefaRQ = request.atualizarTarefa(tarefaDB)
 
