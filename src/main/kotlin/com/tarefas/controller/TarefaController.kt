@@ -18,7 +18,7 @@ class TarefaController(
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun criar(@RequestBody request: PostTarefaRequest) {
-        return service.criar(request.criarTarefa())
+        return service.criar(request)
     }
 
     @PutMapping("/{id}")

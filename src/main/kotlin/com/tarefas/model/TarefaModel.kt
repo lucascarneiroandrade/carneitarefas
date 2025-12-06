@@ -17,7 +17,11 @@ data class TarefaModel(
 
     var criadoEm: LocalDateTime,
 
-    var atualizadoEm: LocalDateTime?
+    var atualizadoEm: LocalDateTime?,
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    var usuarioId: UsuarioModel
 
 
 )
