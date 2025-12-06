@@ -3,6 +3,7 @@ package com.tarefas.extension
 import com.tarefas.enums.TarefaStatusEnum
 import com.tarefas.model.TarefaModel
 import com.tarefas.model.UsuarioModel
+import com.tarefas.request.GetTarefaResponse
 import com.tarefas.request.PostTarefaRequest
 import com.tarefas.request.PostUsuarioRequest
 import com.tarefas.request.PutTarefaRequest
@@ -27,6 +28,14 @@ fun PutTarefaRequest.atualizarTarefa(tarefaDB: TarefaModel): TarefaModel {
         criadoEm = tarefaDB.criadoEm,
         atualizadoEm = LocalDateTime.now(),
         usuarioId = tarefaDB.usuarioId)
+}
+
+fun TarefaModel.converterParaResponse(): GetTarefaResponse{
+    return GetTarefaResponse(
+        id = this.id,
+        descricao = this.descricao,
+        status = this.status
+    )
 }
 
 fun PostUsuarioRequest.criarUsuario(): UsuarioModel{

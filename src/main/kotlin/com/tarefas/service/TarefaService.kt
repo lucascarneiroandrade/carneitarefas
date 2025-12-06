@@ -1,9 +1,11 @@
 package com.tarefas.service
 
 import com.tarefas.extension.atualizarTarefa
+import com.tarefas.extension.converterParaResponse
 import com.tarefas.extension.criarTarefa
 import com.tarefas.model.TarefaModel
 import com.tarefas.repository.TarefaRepository
+import com.tarefas.request.GetTarefaResponse
 import com.tarefas.request.PostTarefaRequest
 import com.tarefas.request.PutTarefaRequest
 import org.springframework.stereotype.Service
@@ -30,15 +32,20 @@ class TarefaService(
         tarefaRepository.save(tarefaRQ)
     }
 
-    fun deletar(id: Int) {
-
-        tarefaRepository.delete(listarPorId(id))
-    }
-
     fun listarPorId(id: Int): TarefaModel{
 
         return tarefaRepository.findById(id)
             .orElseThrow{ RuntimeException("Tarefa $id não encontrada") }
+    }
+
+    fun listarPorUsuario(id: Int): List<GetTarefaResponse> {
+        val usuario = usuarioService.listarPorId(id)
+        return tarefaRepository.findByUsuarioId(usuario).map { it.converterParaResponse() }
+    }
+
+    fun deletar(id: Int) {
+
+        tarefaRepository.delete(listarPorId(id))
     }
 
 
