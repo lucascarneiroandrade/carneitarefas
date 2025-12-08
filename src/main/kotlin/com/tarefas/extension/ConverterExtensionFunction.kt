@@ -3,12 +3,12 @@ package com.tarefas.extension
 import com.tarefas.enums.TarefaStatusEnum
 import com.tarefas.model.TarefaModel
 import com.tarefas.model.UsuarioModel
-import com.tarefas.response.GetTarefaResponse
-import com.tarefas.request.PostTarefaRequest
-import com.tarefas.request.PostUsuarioRequest
-import com.tarefas.request.PutTarefaRequest
-import com.tarefas.request.PutUsuarioRequest
-import com.tarefas.response.GetUsuarioResponse
+import com.tarefas.controller.response.GetTarefaResponse
+import com.tarefas.controller.request.PostTarefaRequest
+import com.tarefas.controller.request.PostUsuarioRequest
+import com.tarefas.controller.request.PutTarefaRequest
+import com.tarefas.controller.request.PutUsuarioRequest
+import com.tarefas.controller.response.GetUsuarioResponse
 import java.time.LocalDateTime
 
 fun PostTarefaRequest.criarTarefa(usuario: UsuarioModel): TarefaModel{

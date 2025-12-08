@@ -6,8 +6,8 @@ import com.tarefas.extension.atualizarUsuario
 import com.tarefas.extension.criarUsuario
 import com.tarefas.model.UsuarioModel
 import com.tarefas.repository.UsuarioRepository
-import com.tarefas.request.PostUsuarioRequest
-import com.tarefas.request.PutUsuarioRequest
+import com.tarefas.controller.request.PostUsuarioRequest
+import com.tarefas.controller.request.PutUsuarioRequest
 import org.springframework.stereotype.Service
 
 

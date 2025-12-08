@@ -1,4 +1,4 @@
-package com.tarefas.response
+package com.tarefas.controller.response
 
 data class FieldErrorResponse(
 

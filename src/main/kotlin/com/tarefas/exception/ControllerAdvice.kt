@@ -1,8 +1,8 @@
 package com.tarefas.exception
 
 import com.tarefas.enums.ErrorsEnum
-import com.tarefas.response.ErrorResponse
-import com.tarefas.response.FieldErrorResponse
+import com.tarefas.controller.response.ErrorResponse
+import com.tarefas.controller.response.FieldErrorResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.MethodArgumentNotValidException

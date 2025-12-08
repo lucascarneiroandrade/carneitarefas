@@ -7,9 +7,9 @@ import com.tarefas.extension.converterParaResponse
 import com.tarefas.extension.criarTarefa
 import com.tarefas.model.TarefaModel
 import com.tarefas.repository.TarefaRepository
-import com.tarefas.request.PostTarefaRequest
-import com.tarefas.request.PutTarefaRequest
-import com.tarefas.response.GetTarefaResponse
+import com.tarefas.controller.request.PostTarefaRequest
+import com.tarefas.controller.request.PutTarefaRequest
+import com.tarefas.controller.response.GetTarefaResponse
 import org.springframework.stereotype.Service
 
 

@@ -1,9 +1,9 @@
 package com.tarefas.controller
 
 import com.tarefas.extension.converterParaResponse
-import com.tarefas.request.PostTarefaRequest
-import com.tarefas.request.PutTarefaRequest
-import com.tarefas.response.GetTarefaResponse
+import com.tarefas.controller.request.PostTarefaRequest
+import com.tarefas.controller.request.PutTarefaRequest
+import com.tarefas.controller.response.GetTarefaResponse
 import com.tarefas.service.TarefaService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*

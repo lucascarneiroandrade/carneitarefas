@@ -1,4 +1,4 @@
-package com.tarefas.request
+package com.tarefas.controller.request
 
 data class PostTarefaRequest(
 

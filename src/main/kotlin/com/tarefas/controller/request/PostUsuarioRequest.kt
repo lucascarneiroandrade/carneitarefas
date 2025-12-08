@@ -1,4 +1,4 @@
-package com.tarefas.request
+package com.tarefas.controller.request
 
 import com.tarefas.validation.EmailAvailable
 import jakarta.validation.constraints.Email

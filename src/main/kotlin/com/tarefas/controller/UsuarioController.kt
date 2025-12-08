@@ -1,9 +1,9 @@
 package com.tarefas.controller
 
 import com.tarefas.extension.converterParaResponse
-import com.tarefas.request.PostUsuarioRequest
-import com.tarefas.request.PutUsuarioRequest
-import com.tarefas.response.GetUsuarioResponse
+import com.tarefas.controller.request.PostUsuarioRequest
+import com.tarefas.controller.request.PutUsuarioRequest
+import com.tarefas.controller.response.GetUsuarioResponse
 import com.tarefas.service.UsuarioService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
