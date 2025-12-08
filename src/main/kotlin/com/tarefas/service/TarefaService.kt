@@ -20,7 +20,8 @@ class TarefaService(
 
 
     fun criar(request: PostTarefaRequest){
-        val tarefa = tarefaMapper.criarTarefa(request)
+        val usuario = usuarioService.listarPorId(request.usuarioId)
+        val tarefa = tarefaMapper.criarTarefa(request, usuario)
 
         tarefaRepository.save(tarefa)
     }

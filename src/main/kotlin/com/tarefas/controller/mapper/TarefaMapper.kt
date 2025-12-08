@@ -5,23 +5,21 @@ import com.tarefas.controller.request.PutTarefaRequest
 import com.tarefas.controller.response.GetTarefaResponse
 import com.tarefas.enums.TarefaStatusEnum
 import com.tarefas.model.TarefaModel
-import com.tarefas.service.UsuarioService
+import com.tarefas.model.UsuarioModel
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 
 @Component
-class TarefaMapper(
-    private val usuarioService: UsuarioService
-) {
+class TarefaMapper{
 
-    fun criarTarefa(request: PostTarefaRequest): TarefaModel{
+    fun criarTarefa(request: PostTarefaRequest, usuario: UsuarioModel): TarefaModel{
         return TarefaModel(
             id = null,
             descricao = request.descricao,
             status = TarefaStatusEnum.A_FAZER,
             criadoEm = LocalDateTime.now(),
             atualizadoEm = null,
-            usuarioId = usuarioService.listarPorId(request.usuarioId)
+            usuarioId = usuario
         )
     }
 
