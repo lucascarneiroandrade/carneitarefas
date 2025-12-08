@@ -1,6 +1,5 @@
 package com.tarefas.controller
 
-import com.tarefas.extension.converterParaResponse
 import com.tarefas.controller.request.PostTarefaRequest
 import com.tarefas.controller.request.PutTarefaRequest
 import com.tarefas.controller.response.GetTarefaResponse
@@ -29,7 +28,7 @@ class TarefaController(
 
     @GetMapping("/{id}")
     fun listarPorId(@PathVariable id: Int): GetTarefaResponse{
-        return tarefaService.listarPorId(id).converterParaResponse()
+        return tarefaService.listar(id)
     }
 
     @GetMapping("/listar-por-usuario/{id}")

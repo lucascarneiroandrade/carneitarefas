@@ -1,6 +1,5 @@
 package com.tarefas.controller
 
-import com.tarefas.extension.converterParaResponse
 import com.tarefas.controller.request.PostUsuarioRequest
 import com.tarefas.controller.request.PutUsuarioRequest
 import com.tarefas.controller.response.GetUsuarioResponse
@@ -30,7 +29,7 @@ class UsuarioController(
 
     @GetMapping("/{id}")
     fun listarPorId(@PathVariable id: Int): GetUsuarioResponse{
-        return usuarioService.listarPorId(id).converterParaResponse()
+        return usuarioService.listar(id)
     }
 
 }
