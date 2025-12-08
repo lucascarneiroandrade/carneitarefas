@@ -1,4 +1,4 @@
-package com.tarefas.request
+package com.tarefas.response
 
 import com.tarefas.enums.TarefaStatusEnum
 

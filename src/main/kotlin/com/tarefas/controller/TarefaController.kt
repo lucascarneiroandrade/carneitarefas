@@ -1,7 +1,7 @@
 package com.tarefas.controller
 
 import com.tarefas.model.TarefaModel
-import com.tarefas.request.GetTarefaResponse
+import com.tarefas.response.GetTarefaResponse
 import com.tarefas.request.PostTarefaRequest
 import com.tarefas.request.PutTarefaRequest
 import com.tarefas.service.TarefaService

@@ -3,7 +3,7 @@ package com.tarefas.extension
 import com.tarefas.enums.TarefaStatusEnum
 import com.tarefas.model.TarefaModel
 import com.tarefas.model.UsuarioModel
-import com.tarefas.request.GetTarefaResponse
+import com.tarefas.response.GetTarefaResponse
 import com.tarefas.request.PostTarefaRequest
 import com.tarefas.request.PostUsuarioRequest
 import com.tarefas.request.PutTarefaRequest
