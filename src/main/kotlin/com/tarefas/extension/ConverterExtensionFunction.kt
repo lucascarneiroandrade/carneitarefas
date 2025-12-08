@@ -8,6 +8,7 @@ import com.tarefas.request.PostTarefaRequest
 import com.tarefas.request.PostUsuarioRequest
 import com.tarefas.request.PutTarefaRequest
 import com.tarefas.request.PutUsuarioRequest
+import com.tarefas.response.GetUsuarioResponse
 import java.time.LocalDateTime
 
 fun PostTarefaRequest.criarTarefa(usuario: UsuarioModel): TarefaModel{
@@ -52,5 +53,13 @@ fun PutUsuarioRequest.atualizarUsuario(usuarioDB: UsuarioModel): UsuarioModel{
         nome = this.nome ?: usuarioDB.nome,
         email = this.email ?: usuarioDB.email,
         senha = usuarioDB.senha
+    )
+}
+
+fun UsuarioModel.converterParaResponse(): GetUsuarioResponse{
+    return GetUsuarioResponse(
+        id = this.id,
+        nome = this.nome,
+        email = this.email
     )
 }

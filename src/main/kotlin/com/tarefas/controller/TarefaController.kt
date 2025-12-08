@@ -1,9 +1,9 @@
 package com.tarefas.controller
 
-import com.tarefas.model.TarefaModel
-import com.tarefas.response.GetTarefaResponse
+import com.tarefas.extension.converterParaResponse
 import com.tarefas.request.PostTarefaRequest
 import com.tarefas.request.PutTarefaRequest
+import com.tarefas.response.GetTarefaResponse
 import com.tarefas.service.TarefaService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -28,8 +28,8 @@ class TarefaController(
     }
 
     @GetMapping("/{id}")
-    fun listarPorId(@PathVariable id: Int): TarefaModel{
-        return tarefaService.listarPorId(id)
+    fun listarPorId(@PathVariable id: Int): GetTarefaResponse{
+        return tarefaService.listarPorId(id).converterParaResponse()
     }
 
     @GetMapping("/listar-por-usuario/{id}")

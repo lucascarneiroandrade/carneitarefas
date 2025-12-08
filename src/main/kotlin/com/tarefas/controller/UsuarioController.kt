@@ -1,18 +1,12 @@
 package com.tarefas.controller
 
-import com.tarefas.model.UsuarioModel
+import com.tarefas.extension.converterParaResponse
 import com.tarefas.request.PostUsuarioRequest
 import com.tarefas.request.PutUsuarioRequest
+import com.tarefas.response.GetUsuarioResponse
 import com.tarefas.service.UsuarioService
 import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseStatus
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 
 @RestController
@@ -34,8 +28,8 @@ class UsuarioController(
     }
 
     @GetMapping("/{id}")
-    fun listarPorId(@PathVariable id: Int): UsuarioModel{
-        return usuarioService.listarPorId(id)
+    fun listarPorId(@PathVariable id: Int): GetUsuarioResponse{
+        return usuarioService.listarPorId(id).converterParaResponse()
     }
 
 }
