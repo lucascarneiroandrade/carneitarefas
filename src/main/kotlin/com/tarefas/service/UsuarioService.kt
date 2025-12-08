@@ -1,5 +1,6 @@
 package com.tarefas.service
 
+import com.tarefas.enums.ErrorsEnum
 import com.tarefas.exception.NotFoundException
 import com.tarefas.extension.atualizarUsuario
 import com.tarefas.extension.criarUsuario
@@ -32,7 +33,14 @@ class UsuarioService(
     fun listarPorId(id: Int): UsuarioModel{
 
         return usuarioRepository.findById(id)
-            .orElseThrow{ NotFoundException("Usuário [${id}] não existe!", "TRFS-002") }
+            .orElseThrow{ NotFoundException(
+                ErrorsEnum.TRFS002.message.format(id),
+                ErrorsEnum.TRFS002.code) }
+    }
+
+    fun emailDisponivel(email: String): Boolean {
+        return !usuarioRepository.existsByEmail(email)
+
     }
 
 }

@@ -5,6 +5,7 @@ import com.tarefas.request.PostUsuarioRequest
 import com.tarefas.request.PutUsuarioRequest
 import com.tarefas.response.GetUsuarioResponse
 import com.tarefas.service.UsuarioService
+import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
@@ -17,7 +18,7 @@ class UsuarioController(
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    fun criar(@RequestBody request: PostUsuarioRequest){
+    fun criar(@RequestBody @Valid request: PostUsuarioRequest){
         usuarioService.criar(request)
     }
 

@@ -1,0 +1,14 @@
+package com.tarefas.validation
+
+import com.tarefas.service.UsuarioService
+import jakarta.validation.ConstraintValidator
+import jakarta.validation.ConstraintValidatorContext
+
+class EmailAvailableValidator(var usuarioService: UsuarioService): ConstraintValidator<EmailAvailable, String> {
+    override fun isValid(value: String?, context: ConstraintValidatorContext?): Boolean {
+        if(value.isNullOrEmpty()){
+            return false
+        }
+        return usuarioService.emailDisponivel(value)
+    }
+}

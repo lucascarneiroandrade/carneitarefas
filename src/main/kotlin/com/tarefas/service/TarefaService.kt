@@ -1,5 +1,6 @@
 package com.tarefas.service
 
+import com.tarefas.enums.ErrorsEnum
 import com.tarefas.exception.NotFoundException
 import com.tarefas.extension.atualizarTarefa
 import com.tarefas.extension.converterParaResponse
@@ -36,7 +37,9 @@ class TarefaService(
     fun listarPorId(id: Int): TarefaModel{
 
         return tarefaRepository.findById(id)
-            .orElseThrow{ NotFoundException("Tarefa [${id}] não existe!", "TRFS-001") }
+            .orElseThrow{ NotFoundException(
+                ErrorsEnum.TRFS001.message.format(id),
+                ErrorsEnum.TRFS001.code) }
     }
 
     fun listarPorUsuario(id: Int): List<GetTarefaResponse> {
