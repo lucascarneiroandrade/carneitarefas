@@ -3,8 +3,8 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://localhost:3306/kotlin
+    url: jdbc:mysql://localhost:3306/tarefas
     username: root
-    password: admin
+    password: root
   jackson:
     default-property-inclusion: non_null
