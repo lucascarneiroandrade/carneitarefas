@@ -1,5 +1,6 @@
 package com.tarefas.service
 
+import com.tarefas.exception.NotFoundException
 import com.tarefas.extension.atualizarTarefa
 import com.tarefas.extension.converterParaResponse
 import com.tarefas.extension.criarTarefa
@@ -35,7 +36,7 @@ class TarefaService(
     fun listarPorId(id: Int): TarefaModel{
 
         return tarefaRepository.findById(id)
-            .orElseThrow{ RuntimeException("Tarefa $id não encontrada") }
+            .orElseThrow{ NotFoundException("Tarefa [${id}] não existe!", "TRFS-001") }
     }
 
     fun listarPorUsuario(id: Int): List<GetTarefaResponse> {

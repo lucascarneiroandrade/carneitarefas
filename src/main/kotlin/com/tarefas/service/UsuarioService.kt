@@ -1,5 +1,6 @@
 package com.tarefas.service
 
+import com.tarefas.exception.NotFoundException
 import com.tarefas.extension.atualizarUsuario
 import com.tarefas.extension.criarUsuario
 import com.tarefas.model.UsuarioModel
@@ -31,7 +32,7 @@ class UsuarioService(
     fun listarPorId(id: Int): UsuarioModel{
 
         return usuarioRepository.findById(id)
-            .orElseThrow{ RuntimeException("Usuário $id não encontrado") }
+            .orElseThrow{ NotFoundException("Usuário [${id}] não existe!", "TRFS-002") }
     }
 
 }
