@@ -5,23 +5,31 @@ import com.tarefas.controller.request.PostUsuarioRequest
 import com.tarefas.controller.request.PutUsuarioRequest
 import com.tarefas.controller.response.GetUsuarioResponse
 import com.tarefas.enums.ErrorsEnum
+import com.tarefas.enums.Profile
 import com.tarefas.exception.NotFoundException
 import com.tarefas.model.UsuarioModel
 import com.tarefas.repository.UsuarioRepository
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
 
 @Service
 class UsuarioService(
-    var usuarioRepository: UsuarioRepository,
-    var usuarioMapper: UsuarioMapper
+    private var usuarioRepository: UsuarioRepository,
+    private var usuarioMapper: UsuarioMapper,
+    private val bCrypt: BCryptPasswordEncoder
 ) {
 
 
     fun criar(request: PostUsuarioRequest){
         val usuario = usuarioMapper.criarUsuario(request)
+        val usuarioCopy = usuario.copy(
 
-        usuarioRepository.save(usuario)
+            roles = setOf(Profile.USUARIO),
+            senha = bCrypt.encode(usuario.senha)
+        )
+
+        usuarioRepository.save(usuarioCopy)
     }
 
     fun atualizar(id: Int, request: PutUsuarioRequest){

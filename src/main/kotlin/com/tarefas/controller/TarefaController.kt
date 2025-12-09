@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("tarefa")
 class TarefaController(
-    val tarefaService: TarefaService
+    private val tarefaService: TarefaService
 ) {
 
     @PostMapping

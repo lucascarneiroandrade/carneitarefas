@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("usuario")
 class UsuarioController(
-    val usuarioService: UsuarioService
+    private val usuarioService: UsuarioService
 ) {
 
     @PostMapping

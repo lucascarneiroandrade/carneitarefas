@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service
 
 @Service
 class TarefaService(
-    val tarefaRepository: TarefaRepository,
-    val usuarioService: UsuarioService,
-    val tarefaMapper: TarefaMapper
+    private val tarefaRepository: TarefaRepository,
+    private val usuarioService: UsuarioService,
+    private val tarefaMapper: TarefaMapper
 ) {
 
 
