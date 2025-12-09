@@ -5,7 +5,7 @@ import com.tarefas.controller.request.PostUsuarioRequest
 import com.tarefas.controller.request.PutUsuarioRequest
 import com.tarefas.controller.response.GetUsuarioResponse
 import com.tarefas.enums.ErrorsEnum
-import com.tarefas.enums.Profile
+import com.tarefas.enums.Role
 import com.tarefas.exception.NotFoundException
 import com.tarefas.model.UsuarioModel
 import com.tarefas.repository.UsuarioRepository
@@ -25,7 +25,7 @@ class UsuarioService(
         val usuario = usuarioMapper.criarUsuario(request)
         val usuarioCopy = usuario.copy(
 
-            roles = setOf(Profile.USUARIO),
+            roles = setOf(Role.USUARIO),
             senha = bCrypt.encode(usuario.senha)
         )
 

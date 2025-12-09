@@ -1,6 +1,6 @@
 package com.tarefas.enums
 
-enum class Profile(val descricao: String) {
+enum class Role(val descricao: String) {
 
     ADMIN("ADMIN"),
     USUARIO("USUARIO")

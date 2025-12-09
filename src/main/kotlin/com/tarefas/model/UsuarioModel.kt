@@ -1,6 +1,6 @@
 package com.tarefas.model
 
-import com.tarefas.enums.Profile
+import com.tarefas.enums.Role
 import jakarta.persistence.*
 
 
@@ -18,10 +18,10 @@ data class UsuarioModel(
     var senha: String,
 
     @CollectionTable(name = "usuario_roles", joinColumns = [JoinColumn(name = "usuario_id")])
-    @ElementCollection(targetClass = Profile::class, fetch = FetchType.EAGER)
+    @ElementCollection(targetClass = Role::class, fetch = FetchType.EAGER)
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    var roles: Set<Profile> = setOf()
+    var roles: Set<Role> = setOf()
 
 
 
