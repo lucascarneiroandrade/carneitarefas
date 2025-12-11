@@ -37,8 +37,7 @@ class TarefaMapper{
     fun converterParaListagem(tarefaDB: TarefaModel): GetTarefaResponse{
         return GetTarefaResponse(
             id = tarefaDB.id,
-            descricao = tarefaDB.descricao,
-            status = tarefaDB.status
+            descricao = tarefaDB.descricao
         )
     }
 }

@@ -1,10 +1,7 @@
 package com.tarefas.controller.response
 
-import com.tarefas.enums.TarefaStatusEnum
-
 data class GetTarefaResponse(
 
     var id: Int?,
-    var descricao: String?,
-    var status : TarefaStatusEnum
+    var descricao: String?
 )

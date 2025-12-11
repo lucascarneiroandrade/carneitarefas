@@ -2,6 +2,7 @@ package com.tarefas.controller
 
 import com.tarefas.controller.request.PostTarefaRequest
 import com.tarefas.controller.request.PutTarefaRequest
+import com.tarefas.controller.response.GetTabelaTarefaResponse
 import com.tarefas.controller.response.GetTarefaResponse
 import com.tarefas.service.TarefaService
 import org.springframework.http.HttpStatus
@@ -34,6 +35,11 @@ class TarefaController(
     @GetMapping("/listar-por-usuario/{id}")
     fun listarPorUsuario(@PathVariable id: Int): List<GetTarefaResponse>{
         return tarefaService.listarPorUsuario(id)
+    }
+
+    @GetMapping("listar-tabela-por-usuario/{id}")
+    fun listarTabelaPorUsuario(@PathVariable id: Int): List<GetTabelaTarefaResponse>{
+        return tarefaService.listarTabelaPorUsuario(id)
     }
 
     @DeleteMapping("/{id}")

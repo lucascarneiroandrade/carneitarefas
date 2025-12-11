@@ -3,8 +3,10 @@ package com.tarefas.service
 import com.tarefas.controller.mapper.TarefaMapper
 import com.tarefas.controller.request.PostTarefaRequest
 import com.tarefas.controller.request.PutTarefaRequest
+import com.tarefas.controller.response.GetTabelaTarefaResponse
 import com.tarefas.controller.response.GetTarefaResponse
 import com.tarefas.enums.ErrorsEnum
+import com.tarefas.enums.TarefaStatusEnum
 import com.tarefas.exception.NotFoundException
 import com.tarefas.model.TarefaModel
 import com.tarefas.repository.TarefaRepository
@@ -51,6 +53,26 @@ class TarefaService(
         val usuario = usuarioService.listarPorId(id)
 
         return tarefaRepository.findByUsuarioId(usuario).map { tarefaMapper.converterParaListagem(it) }
+    }
+
+    fun listarTabelaPorUsuario(id: Int): MutableList<GetTabelaTarefaResponse> {
+        val usuario = usuarioService.listarPorId(id)
+
+        val listaTarefas: List<TarefaModel> = tarefaRepository.findByUsuarioId(usuario)
+
+        return TarefaStatusEnum.entries.map { statusEnum ->
+
+            val tarefasDoStatus = listaTarefas
+                .filter { it.status == statusEnum }
+                .map { tarefaMapper.converterParaListagem(it) }
+                .toMutableList()
+
+            GetTabelaTarefaResponse(
+                status = statusEnum.toString(),
+                listaItens = tarefasDoStatus
+            )
+
+        }.toMutableList()
     }
 
     fun deletar(id: Int) {
