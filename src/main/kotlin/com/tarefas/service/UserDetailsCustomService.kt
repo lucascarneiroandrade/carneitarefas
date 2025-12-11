@@ -12,7 +12,7 @@ class UserDetailsCustomService(
     private val usuarioRepository: UsuarioRepository
 ): UserDetailsService {
 
-    override fun loadUserByUsername(id: String): UserDetails? {
+    override fun loadUserByUsername(id: String): UserDetails {
         val usuario = usuarioRepository.findById(id.toInt())
             .orElseThrow{
                 (AuthenticationException("Usuário não encontrado", "999"))

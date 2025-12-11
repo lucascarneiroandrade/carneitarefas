@@ -2,6 +2,7 @@ package com.tarefas.config
 
 import com.tarefas.repository.UsuarioRepository
 import com.tarefas.security.AuthenticationFilter
+import com.tarefas.security.AuthorizationFilter
 import com.tarefas.service.UserDetailsCustomService
 import com.tarefas.util.JwtUtil
 import org.springframework.context.annotation.Bean
@@ -41,9 +42,9 @@ class SecurityConfig(
         val authenticationManager = authManagerBuilder.build()
 
         // 2. Criar e configurar o filtro
-        val authFilter = AuthenticationFilter(usuarioRepository, jwtUtil)
-        authFilter.setAuthenticationManager(authenticationManager)
-        authFilter.setFilterProcessesUrl("/login")
+        val authFilterUserRepository = AuthenticationFilter(usuarioRepository, jwtUtil)
+        authFilterUserRepository.setAuthenticationManager(authenticationManager)
+        authFilterUserRepository.setFilterProcessesUrl("/login")
 
         // 3. Configuração do HttpSecurity
         http
@@ -53,7 +54,8 @@ class SecurityConfig(
                     .anyRequest().authenticated()
             }
             .authenticationManager(authenticationManager)
-            .addFilter(authFilter)
+            .addFilter(authFilterUserRepository)
+            .addFilter(AuthorizationFilter(authenticationManager, userDetails, jwtUtil))
 
         return http.build()
     }
