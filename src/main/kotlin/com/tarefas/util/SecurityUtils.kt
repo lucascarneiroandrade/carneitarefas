@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails
 
 object SecurityUtils {
 
-    fun getUsername(): String {
+    fun getId(): String {
         val authentication = SecurityContextHolder.getContext().authentication
             ?: throw IllegalStateException("Usuário não autenticado")
 

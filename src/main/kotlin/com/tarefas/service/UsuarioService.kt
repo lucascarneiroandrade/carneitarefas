@@ -59,7 +59,7 @@ class UsuarioService(
     }
 
     fun buscaUsuarioLogado(): UsuarioModel{
-        val id = SecurityUtils.getUsername()
+        val id = SecurityUtils.getId()
 
         return listarPorId(id.toInt())
     }
