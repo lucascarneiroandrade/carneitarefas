@@ -9,6 +9,7 @@ import com.tarefas.enums.Role
 import com.tarefas.exception.NotFoundException
 import com.tarefas.model.UsuarioModel
 import com.tarefas.repository.UsuarioRepository
+import com.tarefas.util.SecurityUtils
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
@@ -55,6 +56,12 @@ class UsuarioService(
     fun emailDisponivel(email: String): Boolean {
         return !usuarioRepository.existsByEmail(email)
 
+    }
+
+    fun buscaUsuarioLogado(): UsuarioModel{
+        val id = SecurityUtils.getUsername()
+
+        return listarPorId(id.toInt())
     }
 
 }

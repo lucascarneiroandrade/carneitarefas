@@ -1,5 +1,6 @@
 package com.tarefas.config
 
+import com.tarefas.enums.Role
 import com.tarefas.repository.UsuarioRepository
 import com.tarefas.security.AuthenticationFilter
 import com.tarefas.security.AuthorizationFilter
@@ -25,6 +26,9 @@ class SecurityConfig(
         "/login"
     )
 
+    private val ADMIN_MATCHERS = arrayOf(
+        "/admin/**"
+    )
     @Bean
     fun bCryptPasswordEncoder(): BCryptPasswordEncoder {
         return BCryptPasswordEncoder()
@@ -51,8 +55,10 @@ class SecurityConfig(
             .csrf { it.disable() }
             .authorizeHttpRequests { auth ->
                 auth.requestMatchers(HttpMethod.POST, *PUBLIC_POST_MATCHERS).permitAll()
+                    .requestMatchers(*ADMIN_MATCHERS).hasAuthority(Role.ADMIN.descricao)
                     .anyRequest().authenticated()
             }
+
             .authenticationManager(authenticationManager)
             .addFilter(authFilterUserRepository)
             .addFilter(AuthorizationFilter(authenticationManager, userDetails, jwtUtil))
