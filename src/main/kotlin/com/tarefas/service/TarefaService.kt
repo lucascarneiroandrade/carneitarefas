@@ -1,6 +1,7 @@
 package com.tarefas.service
 
 import com.tarefas.controller.mapper.TarefaMapper
+import com.tarefas.controller.request.PatchStatusTarefaItemRequest
 import com.tarefas.controller.request.PostTarefaRequest
 import com.tarefas.controller.request.PutTarefaRequest
 import com.tarefas.controller.response.GetTabelaTarefaResponse
@@ -11,6 +12,8 @@ import com.tarefas.exception.NotFoundException
 import com.tarefas.model.TarefaModel
 import com.tarefas.repository.TarefaRepository
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
+import java.time.LocalDateTime
 
 
 @Service
@@ -78,6 +81,29 @@ class TarefaService(
     fun deletar(id: Int) {
 
         tarefaRepository.delete(listarPorId(id))
+    }
+
+    @Transactional
+    fun atualizarStatusEmLote(request: List<PatchStatusTarefaItemRequest>) {
+
+        val ids = request.map { it.id }.toSet()
+
+        val tarefas = tarefaRepository.findAllById(ids).toList()
+
+        if(tarefas.size != ids.size){
+            throw NotFoundException(
+                message = ErrorsEnum.TRFS001.message,
+                errorCode = ErrorsEnum.TRFS001.code)
+        }
+
+        val agora = LocalDateTime.now()
+        val statusPorId = request.associate { it.id to it.status }
+
+        tarefas.forEach {
+            it.status = statusPorId[it.id]!!
+            it.atualizadoEm = agora
+        }
+        tarefaRepository.saveAll(tarefas)
     }
 
 

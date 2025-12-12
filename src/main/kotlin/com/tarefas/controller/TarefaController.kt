@@ -1,5 +1,6 @@
 package com.tarefas.controller
 
+import com.tarefas.controller.request.PatchStatusTarefaItemRequest
 import com.tarefas.controller.request.PostTarefaRequest
 import com.tarefas.controller.request.PutTarefaRequest
 import com.tarefas.controller.response.GetTabelaTarefaResponse
@@ -46,6 +47,12 @@ class TarefaController(
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deletar(@PathVariable id: Int){
         return tarefaService.deletar(id)
+    }
+
+    @PatchMapping("/atualizar-status-lote")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun atualizarStatusLote(@RequestBody request: List<PatchStatusTarefaItemRequest>){
+        return tarefaService.atualizarStatusEmLote(request)
     }
 
 
