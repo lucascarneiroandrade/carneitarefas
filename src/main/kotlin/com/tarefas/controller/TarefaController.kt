@@ -3,7 +3,7 @@ package com.tarefas.controller
 import com.tarefas.controller.request.PatchStatusTarefaItemRequest
 import com.tarefas.controller.request.PostTarefaRequest
 import com.tarefas.controller.response.GetTabelaTarefaResponse
-import com.tarefas.service.TarefaService
+import com.tarefas.model.service.TarefaService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 

@@ -4,7 +4,7 @@ import com.tarefas.util.JwtUtil
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.tarefas.controller.request.LoginRequest
 import com.tarefas.exception.AuthenticationException
-import com.tarefas.repository.UsuarioRepository
+import com.tarefas.model.repository.UsuarioRepository
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse

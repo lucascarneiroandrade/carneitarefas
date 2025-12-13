@@ -3,7 +3,7 @@ package com.tarefas.controller
 import com.tarefas.controller.request.PostUsuarioRequest
 import com.tarefas.controller.request.PutUsuarioRequest
 import com.tarefas.controller.response.GetUsuarioResponse
-import com.tarefas.service.UsuarioService
+import com.tarefas.model.service.UsuarioService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.security.access.prepost.PreAuthorize

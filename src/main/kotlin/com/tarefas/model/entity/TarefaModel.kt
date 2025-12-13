@@ -1,4 +1,4 @@
-package com.tarefas.model
+package com.tarefas.model.entity
 
 import com.tarefas.enums.TarefaStatusEnum
 import jakarta.persistence.*

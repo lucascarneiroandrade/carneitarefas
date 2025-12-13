@@ -1,6 +1,6 @@
-package com.tarefas.repository
+package com.tarefas.model.repository
 
-import com.tarefas.model.UsuarioModel
+import com.tarefas.model.entity.UsuarioModel
 import org.springframework.data.repository.CrudRepository
 
 interface UsuarioRepository: CrudRepository<UsuarioModel, Int> {

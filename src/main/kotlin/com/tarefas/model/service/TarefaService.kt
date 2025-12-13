@@ -1,4 +1,4 @@
-package com.tarefas.service
+package com.tarefas.model.service
 
 import com.tarefas.controller.request.PatchStatusTarefaItemRequest
 import com.tarefas.controller.request.PostTarefaRequest
@@ -7,12 +7,13 @@ import com.tarefas.enums.ErrorsEnum
 import com.tarefas.enums.TarefaStatusEnum
 import com.tarefas.exception.NotFoundException
 import com.tarefas.exception.NotPermittedException
-import com.tarefas.mapper.TarefaMapper
-import com.tarefas.model.TarefaModel
-import com.tarefas.repository.TarefaRepository
+import com.tarefas.model.mapper.TarefaMapper
+import com.tarefas.model.entity.TarefaModel
+import com.tarefas.model.repository.TarefaRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
+import kotlin.collections.get
 
 
 @Service

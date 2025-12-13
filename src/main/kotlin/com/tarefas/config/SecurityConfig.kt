@@ -1,10 +1,10 @@
 package com.tarefas.config
 
 import com.tarefas.enums.Role
-import com.tarefas.repository.UsuarioRepository
+import com.tarefas.model.repository.UsuarioRepository
 import com.tarefas.security.AuthenticationFilter
 import com.tarefas.security.AuthorizationFilter
-import com.tarefas.service.UserDetailsCustomService
+import com.tarefas.model.service.UserDetailsCustomService
 import com.tarefas.util.JwtUtil
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

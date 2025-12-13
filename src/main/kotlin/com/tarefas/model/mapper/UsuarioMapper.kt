@@ -1,9 +1,9 @@
-package com.tarefas.mapper
+package com.tarefas.model.mapper
 
 import com.tarefas.controller.request.PostUsuarioRequest
 import com.tarefas.controller.request.PutUsuarioRequest
 import com.tarefas.controller.response.GetUsuarioResponse
-import com.tarefas.model.UsuarioModel
+import com.tarefas.model.entity.UsuarioModel
 import org.springframework.stereotype.Component
 
 @Component

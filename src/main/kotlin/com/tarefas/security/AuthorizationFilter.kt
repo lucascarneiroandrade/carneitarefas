@@ -1,7 +1,7 @@
 package com.tarefas.security
 
 import com.tarefas.exception.AuthenticationException
-import com.tarefas.service.UserDetailsCustomService
+import com.tarefas.model.service.UserDetailsCustomService
 import com.tarefas.util.JwtUtil
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest

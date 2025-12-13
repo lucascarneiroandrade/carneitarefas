@@ -1,6 +1,6 @@
 package com.tarefas.validation
 
-import com.tarefas.service.UsuarioService
+import com.tarefas.model.service.UsuarioService
 import jakarta.validation.ConstraintValidator
 import jakarta.validation.ConstraintValidatorContext
 
