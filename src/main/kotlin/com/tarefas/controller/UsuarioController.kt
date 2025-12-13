@@ -6,6 +6,7 @@ import com.tarefas.controller.response.GetUsuarioResponse
 import com.tarefas.service.UsuarioService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 
 
@@ -23,11 +24,13 @@ class UsuarioController(
 
     @PutMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('ADMIN')")
     fun atualizar(@PathVariable id: Int, @RequestBody request: PutUsuarioRequest){
         usuarioService.atualizar(id, request)
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     fun listarPorId(@PathVariable id: Int): GetUsuarioResponse{
         return usuarioService.listar(id)
     }
