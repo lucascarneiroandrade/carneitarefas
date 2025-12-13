@@ -8,11 +8,16 @@ import com.tarefas.service.UserDetailsCustomService
 import com.tarefas.util.JwtUtil
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.http.HttpMethod
+import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.config.http.SessionCreationPolicy
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
+import org.springframework.web.filter.CorsFilter
 
 @Configuration
 class SecurityConfig(
@@ -21,48 +26,80 @@ class SecurityConfig(
     private val jwtUtil: JwtUtil
 ) {
 
-    private val PUBLIC_POST_MATCHERS = arrayOf(
-        "/usuario",
-        "/login"
+    private val PUBLIC_MATCHERS = arrayOf(
+        "/login",
+        "/usuario"
+    )
+
+    private val SWAGGER_MATCHERS = arrayOf(
+        "/v3/api-docs",
+        "/v3/api-docs/**",
+        "/swagger-ui.html",
+        "/swagger-ui/**"
     )
 
     private val ADMIN_MATCHERS = arrayOf(
         "/admin/**"
     )
+
+
     @Bean
-    fun bCryptPasswordEncoder(): BCryptPasswordEncoder {
-        return BCryptPasswordEncoder()
+    fun authenticationManager(
+        http: HttpSecurity,
+        passwordEncoder: PasswordEncoder
+    ): AuthenticationManager{
+        val builder = http.getSharedObject(AuthenticationManagerBuilder::class.java)
+            builder
+                .userDetailsService(userDetails)
+                .passwordEncoder(passwordEncoder)
+
+        return builder.build()
     }
 
     @Bean
-    fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
+    fun securityFilterChain(
+        http: HttpSecurity,
+        authenticationManager: AuthenticationManager): SecurityFilterChain {
 
-        // 1. Configurar o AuthenticationManger
-        val authManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder::class.java)
-        authManagerBuilder
-            .userDetailsService(userDetails)
-            .passwordEncoder(bCryptPasswordEncoder())
 
-        val authenticationManager = authManagerBuilder.build()
-
-        // 2. Criar e configurar o filtro
-        val authFilterUserRepository = AuthenticationFilter(usuarioRepository, jwtUtil)
-        authFilterUserRepository.setAuthenticationManager(authenticationManager)
-        authFilterUserRepository.setFilterProcessesUrl("/login")
-
-        // 3. Configuração do HttpSecurity
         http
             .csrf { it.disable() }
-            .authorizeHttpRequests { auth ->
-                auth.requestMatchers(HttpMethod.POST, *PUBLIC_POST_MATCHERS).permitAll()
-                    .requestMatchers(*ADMIN_MATCHERS).hasAuthority(Role.ADMIN.descricao)
+            .sessionManagement {
+                it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            }
+            .authorizeHttpRequests {
+                it
+                    .requestMatchers(*PUBLIC_MATCHERS
+                    ).permitAll()
+                    .requestMatchers(*SWAGGER_MATCHERS)
+                    .permitAll()
+                    .requestMatchers(*ADMIN_MATCHERS)
+                    .hasAuthority(Role.ADMIN.descricao)
                     .anyRequest().authenticated()
             }
-
             .authenticationManager(authenticationManager)
-            .addFilter(authFilterUserRepository)
-            .addFilter(AuthorizationFilter(authenticationManager, userDetails, jwtUtil))
+            .addFilterBefore(
+                AuthorizationFilter(authenticationManager, userDetails, jwtUtil),
+                UsernamePasswordAuthenticationFilter::class.java
+            )
+            .addFilter(AuthenticationFilter(usuarioRepository, jwtUtil).apply {
+                setAuthenticationManager(authenticationManager)
+                setFilterProcessesUrl("/login")
+            })
+
 
         return http.build()
+    }
+
+    @Bean
+    fun corsConfig(): CorsFilter{
+        val source = UrlBasedCorsConfigurationSource()
+        val config = CorsConfiguration()
+        config.allowCredentials = true
+        config.addAllowedOrigin("*")
+        config.addAllowedHeader("*")
+        config.addAllowedMethod("*")
+        source.registerCorsConfiguration("/**", config)
+        return CorsFilter(source)
     }
 }

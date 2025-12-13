@@ -1,16 +1,16 @@
 package com.tarefas.service
 
-import com.tarefas.mapper.UsuarioMapper
 import com.tarefas.controller.request.PostUsuarioRequest
 import com.tarefas.controller.request.PutUsuarioRequest
 import com.tarefas.controller.response.GetUsuarioResponse
 import com.tarefas.enums.ErrorsEnum
 import com.tarefas.enums.Role
 import com.tarefas.exception.NotFoundException
+import com.tarefas.mapper.UsuarioMapper
 import com.tarefas.model.UsuarioModel
 import com.tarefas.repository.UsuarioRepository
 import com.tarefas.util.SecurityUtils
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service
 class UsuarioService(
     private var usuarioRepository: UsuarioRepository,
     private var usuarioMapper: UsuarioMapper,
-    private val bCrypt: BCryptPasswordEncoder
+    private val passwordEncoder: PasswordEncoder
 ) {
 
 
@@ -27,7 +27,7 @@ class UsuarioService(
         val usuarioCopy = usuario.copy(
 
             roles = setOf(Role.USUARIO),
-            senha = bCrypt.encode(usuario.senha)
+            senha = passwordEncoder.encode(usuario.senha)
         )
 
         usuarioRepository.save(usuarioCopy)
