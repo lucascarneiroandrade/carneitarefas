@@ -3,7 +3,7 @@ package com.tarefas.model.mapper
 import com.tarefas.controller.request.PostTarefaRequest
 import com.tarefas.controller.request.PutTarefaRequest
 import com.tarefas.controller.response.GetTarefaResponse
-import com.tarefas.enums.TarefaStatusEnum
+import com.tarefas.model.enums.TarefaStatusEnum
 import com.tarefas.model.entity.TarefaModel
 import com.tarefas.model.entity.UsuarioModel
 import org.springframework.stereotype.Component

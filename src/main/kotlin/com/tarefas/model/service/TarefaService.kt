@@ -3,10 +3,10 @@ package com.tarefas.model.service
 import com.tarefas.controller.request.PatchStatusTarefaItemRequest
 import com.tarefas.controller.request.PostTarefaRequest
 import com.tarefas.controller.response.GetTabelaTarefaResponse
-import com.tarefas.enums.ErrorsEnum
-import com.tarefas.enums.TarefaStatusEnum
-import com.tarefas.exception.NotFoundException
-import com.tarefas.exception.NotPermittedException
+import com.tarefas.model.enums.ErrorsEnum
+import com.tarefas.model.enums.TarefaStatusEnum
+import com.tarefas.model.exception.NotFoundException
+import com.tarefas.model.exception.NotPermittedException
 import com.tarefas.model.mapper.TarefaMapper
 import com.tarefas.model.entity.TarefaModel
 import com.tarefas.model.repository.TarefaRepository

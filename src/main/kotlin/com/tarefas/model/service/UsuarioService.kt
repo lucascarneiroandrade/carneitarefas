@@ -3,13 +3,13 @@ package com.tarefas.model.service
 import com.tarefas.controller.request.PostUsuarioRequest
 import com.tarefas.controller.request.PutUsuarioRequest
 import com.tarefas.controller.response.GetUsuarioResponse
-import com.tarefas.enums.ErrorsEnum
-import com.tarefas.enums.Role
-import com.tarefas.exception.NotFoundException
+import com.tarefas.model.enums.ErrorsEnum
+import com.tarefas.model.enums.Role
+import com.tarefas.model.exception.NotFoundException
 import com.tarefas.model.mapper.UsuarioMapper
 import com.tarefas.model.entity.UsuarioModel
 import com.tarefas.model.repository.UsuarioRepository
-import com.tarefas.util.SecurityUtils
+import com.tarefas.model.util.SecurityUtils
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 

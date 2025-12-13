@@ -1,6 +1,6 @@
 package com.tarefas.model.entity
 
-import com.tarefas.enums.TarefaStatusEnum
+import com.tarefas.model.enums.TarefaStatusEnum
 import jakarta.persistence.*
 import java.time.LocalDateTime
 

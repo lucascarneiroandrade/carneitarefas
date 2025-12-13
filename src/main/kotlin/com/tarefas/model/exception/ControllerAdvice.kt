@@ -1,6 +1,6 @@
-package com.tarefas.exception
+package com.tarefas.model.exception
 
-import com.tarefas.enums.ErrorsEnum
+import com.tarefas.model.enums.ErrorsEnum
 import com.tarefas.controller.response.ErrorResponse
 import com.tarefas.controller.response.FieldErrorResponse
 import org.springframework.http.HttpStatus

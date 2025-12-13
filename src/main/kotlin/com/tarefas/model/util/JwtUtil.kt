@@ -1,6 +1,6 @@
-package com.tarefas.util
+package com.tarefas.model.util
 
-import com.tarefas.exception.AuthenticationException
+import com.tarefas.model.exception.AuthenticationException
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys

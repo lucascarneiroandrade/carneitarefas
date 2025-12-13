@@ -1,6 +1,6 @@
 package com.tarefas.model.entity
 
-import com.tarefas.enums.Role
+import com.tarefas.model.enums.Role
 import jakarta.persistence.*
 
 

@@ -1,6 +1,6 @@
 package com.tarefas.model.service
 
-import com.tarefas.exception.AuthenticationException
+import com.tarefas.model.exception.AuthenticationException
 import com.tarefas.model.repository.UsuarioRepository
 import com.tarefas.security.UserCustomDetails
 import org.springframework.security.core.userdetails.UserDetails

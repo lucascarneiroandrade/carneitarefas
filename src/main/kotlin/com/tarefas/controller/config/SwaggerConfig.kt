@@ -1,4 +1,4 @@
-package com.tarefas.config
+package com.tarefas.controller.config
 
 
 

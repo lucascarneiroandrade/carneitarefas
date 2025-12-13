@@ -1,6 +1,6 @@
 package com.tarefas.controller.request
 
-import com.tarefas.validation.EmailAvailable
+import com.tarefas.model.validation.EmailAvailable
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotEmpty
 

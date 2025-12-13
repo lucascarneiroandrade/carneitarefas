@@ -1,9 +1,9 @@
 package com.tarefas.security
 
-import com.tarefas.util.JwtUtil
+import com.tarefas.model.util.JwtUtil
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.tarefas.controller.request.LoginRequest
-import com.tarefas.exception.AuthenticationException
+import com.tarefas.model.exception.AuthenticationException
 import com.tarefas.model.repository.UsuarioRepository
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest

@@ -1,6 +1,6 @@
 package com.tarefas.controller.request
 
-import com.tarefas.enums.TarefaStatusEnum
+import com.tarefas.model.enums.TarefaStatusEnum
 
 data class PatchStatusTarefaItemRequest(
 

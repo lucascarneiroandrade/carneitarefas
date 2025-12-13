@@ -1,4 +1,4 @@
-package com.tarefas.validation
+package com.tarefas.model.validation
 
 import jakarta.validation.Constraint
 import jakarta.validation.Payload
