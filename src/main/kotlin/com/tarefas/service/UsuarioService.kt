@@ -1,6 +1,6 @@
 package com.tarefas.service
 
-import com.tarefas.controller.mapper.UsuarioMapper
+import com.tarefas.mapper.UsuarioMapper
 import com.tarefas.controller.request.PostUsuarioRequest
 import com.tarefas.controller.request.PutUsuarioRequest
 import com.tarefas.controller.response.GetUsuarioResponse

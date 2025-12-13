@@ -1,14 +1,13 @@
 package com.tarefas.service
 
-import com.tarefas.controller.mapper.TarefaMapper
 import com.tarefas.controller.request.PatchStatusTarefaItemRequest
 import com.tarefas.controller.request.PostTarefaRequest
-import com.tarefas.controller.request.PutTarefaRequest
 import com.tarefas.controller.response.GetTabelaTarefaResponse
-import com.tarefas.controller.response.GetTarefaResponse
 import com.tarefas.enums.ErrorsEnum
 import com.tarefas.enums.TarefaStatusEnum
 import com.tarefas.exception.NotFoundException
+import com.tarefas.exception.NotPermittedException
+import com.tarefas.mapper.TarefaMapper
 import com.tarefas.model.TarefaModel
 import com.tarefas.repository.TarefaRepository
 import org.springframework.stereotype.Service
@@ -31,19 +30,6 @@ class TarefaService(
         tarefaRepository.save(tarefa)
     }
 
-    fun atualizar(id: Int, request: PutTarefaRequest){
-        val tarefaDB = listarPorId(id)
-        val tarefaUP = tarefaMapper.atualizarTarefa(tarefaDB, request)
-
-        tarefaRepository.save(tarefaUP)
-    }
-
-    fun listar(id: Int): GetTarefaResponse{
-        val tarefa = listarPorId(id)
-
-        return tarefaMapper.converterParaListagem(tarefa)
-    }
-
     fun listarPorId(id: Int): TarefaModel{
 
         return tarefaRepository.findById(id)
@@ -52,14 +38,9 @@ class TarefaService(
                 ErrorsEnum.TRFS001.code) }
     }
 
-    fun listarPorUsuario(id: Int): List<GetTarefaResponse> {
-        val usuario = usuarioService.listarPorId(id)
+    fun listarTabela(): MutableList<GetTabelaTarefaResponse> {
 
-        return tarefaRepository.findByUsuarioId(usuario).map { tarefaMapper.converterParaListagem(it) }
-    }
-
-    fun listarTabelaPorUsuario(id: Int): MutableList<GetTabelaTarefaResponse> {
-        val usuario = usuarioService.listarPorId(id)
+        val usuario = usuarioService.buscaUsuarioLogado()
 
         val listaTarefas: List<TarefaModel> = tarefaRepository.findByUsuarioId(usuario)
 
@@ -79,8 +60,10 @@ class TarefaService(
     }
 
     fun deletar(id: Int) {
+        val tarefa = listarPorId(id)
+        validarPermissao(tarefa)
 
-        tarefaRepository.delete(listarPorId(id))
+        tarefaRepository.delete(tarefa)
     }
 
     @Transactional
@@ -100,10 +83,21 @@ class TarefaService(
         val statusPorId = request.associate { it.id to it.status }
 
         tarefas.forEach {
+            validarPermissao(it)
             it.status = statusPorId[it.id]!!
             it.atualizadoEm = agora
         }
         tarefaRepository.saveAll(tarefas)
+    }
+
+    private fun validarPermissao(tarefa: TarefaModel){
+        val usuarioLogado = usuarioService.buscaUsuarioLogado()
+
+        if(tarefa.usuarioId != usuarioLogado){
+            throw NotPermittedException(
+                message = ErrorsEnum.TRFS031.message,
+                errorCode = ErrorsEnum.TRFS031.code)
+        }
     }
 
 

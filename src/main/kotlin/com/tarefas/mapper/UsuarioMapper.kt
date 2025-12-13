@@ -1,4 +1,4 @@
-package com.tarefas.controller.mapper
+package com.tarefas.mapper
 
 import com.tarefas.controller.request.PostUsuarioRequest
 import com.tarefas.controller.request.PutUsuarioRequest
