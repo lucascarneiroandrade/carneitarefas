@@ -1,4 +1,4 @@
-package com.tarefas.security
+package com.tarefas.controller.security
 
 import com.tarefas.model.entity.UsuarioModel
 import org.springframework.security.core.GrantedAuthority

@@ -1,8 +1,9 @@
-package com.tarefas.model.exception
+package com.tarefas.controller
 
-import com.tarefas.model.enums.ErrorsEnum
 import com.tarefas.controller.response.ErrorResponse
 import com.tarefas.controller.response.FieldErrorResponse
+import com.tarefas.model.enums.Errors
+import com.tarefas.model.exception.NotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.MethodArgumentNotValidException
@@ -15,7 +16,7 @@ class ControllerAdvice {
 
     @ExceptionHandler(NotFoundException::class)
     fun handleNotFoundException(ex: NotFoundException, request: WebRequest): ResponseEntity<ErrorResponse> {
-        val erro =  ErrorResponse(
+        val erro = ErrorResponse(
             httpCode = HttpStatus.NOT_FOUND.value(),
             message = ex.message,
             internalCode = ex.errorCode,
@@ -26,11 +27,11 @@ class ControllerAdvice {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
-    fun handleMethodArgumentNotValidException(ex: MethodArgumentNotValidException, request: WebRequest): ResponseEntity<ErrorResponse>{
+    fun handleMethodArgumentNotValidException(ex: MethodArgumentNotValidException, request: WebRequest): ResponseEntity<ErrorResponse> {
         val erro = ErrorResponse(
             httpCode = HttpStatus.UNPROCESSABLE_ENTITY.value(),
-            message = ErrorsEnum.TRFS030.message,
-            internalCode = ErrorsEnum.TRFS030.code,
+            message = Errors.TRFS000.message,
+            internalCode = Errors.TRFS000.code,
             errors = ex.bindingResult.fieldErrors.map { FieldErrorResponse(it.defaultMessage ?: "invalid", it.field) }
 
         )

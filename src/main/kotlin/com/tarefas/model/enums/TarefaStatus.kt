@@ -1,6 +1,6 @@
 package com.tarefas.model.enums
 
-enum class TarefaStatusEnum {
+enum class TarefaStatus {
 
     A_FAZER,
     EM_ANDAMENTO,

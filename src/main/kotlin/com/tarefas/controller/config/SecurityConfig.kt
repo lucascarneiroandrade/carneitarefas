@@ -2,9 +2,10 @@ package com.tarefas.controller.config
 
 import com.tarefas.model.enums.Role
 import com.tarefas.model.repository.UsuarioRepository
-import com.tarefas.security.AuthenticationFilter
-import com.tarefas.security.AuthorizationFilter
-import com.tarefas.model.service.UserDetailsCustomService
+import com.tarefas.controller.security.AuthenticationFilter
+import com.tarefas.controller.security.AuthorizationFilter
+import com.tarefas.controller.security.CustomAuthenticationEntryPoint
+import com.tarefas.controller.security.UserDetailsCustomService
 import com.tarefas.model.util.JwtUtil
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -25,7 +26,8 @@ import org.springframework.web.filter.CorsFilter
 class SecurityConfig(
     private val usuarioRepository: UsuarioRepository,
     private val userDetails: UserDetailsCustomService,
-    private val jwtUtil: JwtUtil
+    private val jwtUtil: JwtUtil,
+    private val customEntryPoint: CustomAuthenticationEntryPoint
 ) {
 
     private val PUBLIC_MATCHERS = arrayOf(
@@ -88,6 +90,9 @@ class SecurityConfig(
                 setAuthenticationManager(authenticationManager)
                 setFilterProcessesUrl("/login")
             })
+            .exceptionHandling{
+                it.authenticationEntryPoint(customEntryPoint)
+            }
 
 
         return http.build()

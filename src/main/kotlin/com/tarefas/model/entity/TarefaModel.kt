@@ -1,6 +1,6 @@
 package com.tarefas.model.entity
 
-import com.tarefas.model.enums.TarefaStatusEnum
+import com.tarefas.model.enums.TarefaStatus
 import jakarta.persistence.*
 import java.time.LocalDateTime
 
@@ -13,7 +13,7 @@ data class TarefaModel(
     var descricao: String,
 
     @Enumerated(EnumType.STRING)
-    var status: TarefaStatusEnum,
+    var status: TarefaStatus,
 
     var criadoEm: LocalDateTime,
 

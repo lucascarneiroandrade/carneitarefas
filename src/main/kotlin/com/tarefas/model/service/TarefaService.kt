@@ -3,17 +3,16 @@ package com.tarefas.model.service
 import com.tarefas.controller.request.PatchStatusTarefaItemRequest
 import com.tarefas.controller.request.PostTarefaRequest
 import com.tarefas.controller.response.GetTabelaTarefaResponse
-import com.tarefas.model.enums.ErrorsEnum
-import com.tarefas.model.enums.TarefaStatusEnum
+import com.tarefas.model.entity.TarefaModel
+import com.tarefas.model.enums.Errors
+import com.tarefas.model.enums.TarefaStatus
 import com.tarefas.model.exception.NotFoundException
 import com.tarefas.model.exception.NotPermittedException
 import com.tarefas.model.mapper.TarefaMapper
-import com.tarefas.model.entity.TarefaModel
 import com.tarefas.model.repository.TarefaRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
-import kotlin.collections.get
 
 
 @Service
@@ -35,8 +34,8 @@ class TarefaService(
 
         return tarefaRepository.findById(id)
             .orElseThrow{ NotFoundException(
-                ErrorsEnum.TRFS001.message.format(id),
-                ErrorsEnum.TRFS001.code) }
+                Errors.TRFS001.message.format(id),
+                Errors.TRFS001.code) }
     }
 
     fun listarTabela(): MutableList<GetTabelaTarefaResponse> {
@@ -45,7 +44,7 @@ class TarefaService(
 
         val listaTarefas: List<TarefaModel> = tarefaRepository.findByUsuarioId(usuario)
 
-        return TarefaStatusEnum.entries.map { statusEnum ->
+        return TarefaStatus.entries.map { statusEnum ->
 
             val tarefasDoStatus = listaTarefas
                 .filter { it.status == statusEnum }
@@ -76,8 +75,8 @@ class TarefaService(
 
         if(tarefas.size != ids.size){
             throw NotFoundException(
-                message = ErrorsEnum.TRFS001.message,
-                errorCode = ErrorsEnum.TRFS001.code)
+                message = Errors.TRFS001.message,
+                errorCode = Errors.TRFS001.code)
         }
 
         val agora = LocalDateTime.now()
@@ -96,8 +95,8 @@ class TarefaService(
 
         if(tarefa.usuarioId != usuarioLogado){
             throw NotPermittedException(
-                message = ErrorsEnum.TRFS031.message,
-                errorCode = ErrorsEnum.TRFS031.code)
+                message = Errors.TRFS031.message,
+                errorCode = Errors.TRFS031.code)
         }
     }
 

@@ -1,10 +1,11 @@
-package com.tarefas.security
+package com.tarefas.controller.security
 
-import com.tarefas.model.util.JwtUtil
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.tarefas.controller.request.LoginRequest
+import com.tarefas.model.enums.Errors
 import com.tarefas.model.exception.AuthenticationException
 import com.tarefas.model.repository.UsuarioRepository
+import com.tarefas.model.util.JwtUtil
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -28,7 +29,7 @@ class AuthenticationFilter(
             )
             return authenticationManager.authenticate(authToken)
         } catch (ex: Exception) {
-            throw AuthenticationException("Falha ao se autenticar", "000")
+            throw AuthenticationException(Errors.TRFS032.message, Errors.TRFS032.code)
         }
     }
 

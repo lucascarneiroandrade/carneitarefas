@@ -3,11 +3,11 @@ package com.tarefas.model.service
 import com.tarefas.controller.request.PostUsuarioRequest
 import com.tarefas.controller.request.PutUsuarioRequest
 import com.tarefas.controller.response.GetUsuarioResponse
-import com.tarefas.model.enums.ErrorsEnum
+import com.tarefas.model.entity.UsuarioModel
+import com.tarefas.model.enums.Errors
 import com.tarefas.model.enums.Role
 import com.tarefas.model.exception.NotFoundException
 import com.tarefas.model.mapper.UsuarioMapper
-import com.tarefas.model.entity.UsuarioModel
 import com.tarefas.model.repository.UsuarioRepository
 import com.tarefas.model.util.SecurityUtils
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -49,8 +49,8 @@ class UsuarioService(
 
         return usuarioRepository.findById(id)
             .orElseThrow{ NotFoundException(
-                ErrorsEnum.TRFS002.message.format(id),
-                ErrorsEnum.TRFS002.code) }
+                Errors.TRFS002.message.format(id),
+                Errors.TRFS002.code) }
     }
 
     fun emailDisponivel(email: String): Boolean {

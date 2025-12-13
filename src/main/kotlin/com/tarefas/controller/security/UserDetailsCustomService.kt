@@ -1,8 +1,8 @@
-package com.tarefas.model.service
+package com.tarefas.controller.security
 
+import com.tarefas.model.enums.Errors
 import com.tarefas.model.exception.AuthenticationException
 import com.tarefas.model.repository.UsuarioRepository
-import com.tarefas.security.UserCustomDetails
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
@@ -15,7 +15,7 @@ class UserDetailsCustomService(
     override fun loadUserByUsername(id: String): UserDetails {
         val usuario = usuarioRepository.findById(id.toInt())
             .orElseThrow{
-                (AuthenticationException("Usuário não encontrado", "999"))
+                (AuthenticationException(Errors.TRFS033.message, Errors.TRFS033.code))
             }
         return UserCustomDetails(usuario)
     }
