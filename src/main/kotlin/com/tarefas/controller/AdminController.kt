@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("admin")
 class AdminController {
 
-
     @GetMapping("/report")
     fun report(): String{
         return "Relatório geral acessado! Permitido apenas para admins!"

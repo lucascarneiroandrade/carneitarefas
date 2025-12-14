@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*
 
 
 @RestController
-@RequestMapping("tarefa")
+@RequestMapping("tarefas")
 class TarefaController(
     private val tarefaService: TarefaService
 ) {
