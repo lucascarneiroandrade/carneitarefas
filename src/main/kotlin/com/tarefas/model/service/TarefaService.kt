@@ -62,41 +62,45 @@ class TarefaService(
     fun deletar(id: Int) {
         val tarefa = listarPorId(id)
         validarPermissao(tarefa)
-
         tarefaRepository.delete(tarefa)
+
     }
 
     @Transactional
     fun atualizarStatusEmLote(request: List<PatchStatusTarefaItemRequest>) {
 
         val ids = request.map { it.id }.toSet()
-
         val tarefas = tarefaRepository.findAllById(ids).toList()
 
         if(tarefas.size != ids.size){
             throw NotFoundException(
                 message = Errors.TRFS001.message,
-                errorCode = Errors.TRFS001.code)
+                errorCode = Errors.TRFS001.code
+            )
         }
 
         val agora = LocalDateTime.now()
         val statusPorId = request.associate { it.id to it.status }
 
-        tarefas.forEach {
-            validarPermissao(it)
-            it.status = statusPorId[it.id]!!
-            it.atualizadoEm = agora
+        tarefas.forEach { tarefa ->
+            validarPermissao(tarefa)
+
+            tarefa.apply {
+                status = statusPorId[id]!!
+                atualizadoEm = agora
+            }
         }
         tarefaRepository.saveAll(tarefas)
     }
 
-    private fun validarPermissao(tarefa: Tarefa){
+    private fun validarPermissao(tarefa: Tarefa) {
         val usuarioLogado = usuarioService.buscaUsuarioLogado()
 
-        if(tarefa.usuarioId != usuarioLogado){
+        if (tarefa.usuarioId != usuarioLogado) {
             throw NotPermittedException(
                 message = Errors.TRFS031.message,
-                errorCode = Errors.TRFS031.code)
+                errorCode = Errors.TRFS031.code
+            )
         }
     }
 
