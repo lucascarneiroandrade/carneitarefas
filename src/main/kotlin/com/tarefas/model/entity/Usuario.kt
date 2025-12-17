@@ -9,7 +9,7 @@ data class Usuario(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int?,
+    var id: Int? = null,
 
     var nome: String,
 
