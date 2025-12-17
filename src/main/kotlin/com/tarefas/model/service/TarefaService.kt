@@ -3,7 +3,7 @@ package com.tarefas.model.service
 import com.tarefas.controller.request.PatchStatusTarefaItemRequest
 import com.tarefas.controller.request.PostTarefaRequest
 import com.tarefas.controller.response.GetTabelaTarefaResponse
-import com.tarefas.model.entity.TarefaModel
+import com.tarefas.model.entity.Tarefa
 import com.tarefas.model.enums.Errors
 import com.tarefas.model.enums.TarefaStatus
 import com.tarefas.model.exception.NotFoundException
@@ -30,7 +30,7 @@ class TarefaService(
         tarefaRepository.save(tarefa)
     }
 
-    fun listarPorId(id: Int): TarefaModel{
+    fun listarPorId(id: Int): Tarefa{
 
         return tarefaRepository.findById(id)
             .orElseThrow{ NotFoundException(
@@ -42,7 +42,7 @@ class TarefaService(
 
         val usuario = usuarioService.buscaUsuarioLogado()
 
-        val listaTarefas: List<TarefaModel> = tarefaRepository.findByUsuarioId(usuario)
+        val listaTarefas: List<Tarefa> = tarefaRepository.findByUsuarioId(usuario)
 
         return TarefaStatus.entries.map { statusEnum ->
 
@@ -90,7 +90,7 @@ class TarefaService(
         tarefaRepository.saveAll(tarefas)
     }
 
-    private fun validarPermissao(tarefa: TarefaModel){
+    private fun validarPermissao(tarefa: Tarefa){
         val usuarioLogado = usuarioService.buscaUsuarioLogado()
 
         if(tarefa.usuarioId != usuarioLogado){

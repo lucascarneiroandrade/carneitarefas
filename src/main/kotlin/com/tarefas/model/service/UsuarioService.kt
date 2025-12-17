@@ -3,7 +3,7 @@ package com.tarefas.model.service
 import com.tarefas.controller.request.PostUsuarioRequest
 import com.tarefas.controller.request.PutUsuarioRequest
 import com.tarefas.controller.response.GetUsuarioResponse
-import com.tarefas.model.entity.UsuarioModel
+import com.tarefas.model.entity.Usuario
 import com.tarefas.model.enums.Errors
 import com.tarefas.model.enums.Role
 import com.tarefas.model.exception.NotFoundException
@@ -45,7 +45,7 @@ class UsuarioService(
         return usuarioMapper.listarUsuarioPorId(usuario)
     }
 
-    fun listarPorId(id: Int): UsuarioModel{
+    fun listarPorId(id: Int): Usuario{
 
         return usuarioRepository.findById(id)
             .orElseThrow{ NotFoundException(
@@ -58,7 +58,7 @@ class UsuarioService(
 
     }
 
-    fun buscaUsuarioLogado(): UsuarioModel{
+    fun buscaUsuarioLogado(): Usuario{
         val id = SecurityUtils.getId()
 
         return listarPorId(id.toInt())

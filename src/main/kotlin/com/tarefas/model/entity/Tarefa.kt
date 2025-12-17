@@ -5,7 +5,7 @@ import jakarta.persistence.*
 import java.time.LocalDateTime
 
 @Entity(name = "tarefa")
-data class TarefaModel(
+data class Tarefa(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ data class TarefaModel(
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
-    var usuarioId: UsuarioModel
+    var usuarioId: Usuario
 
 
 )

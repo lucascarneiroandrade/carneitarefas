@@ -1,7 +1,7 @@
 package com.tarefas.controller.security
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.tarefas.controller.request.LoginRequest
+import com.tarefas.controller.security.request.LoginRequest
 import com.tarefas.model.enums.Errors
 import com.tarefas.model.exception.AuthenticationException
 import com.tarefas.model.repository.UsuarioRepository
