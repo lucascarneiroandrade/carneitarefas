@@ -22,15 +22,15 @@ class UsuarioService(
 ) {
 
 
-    fun criar(request: PostUsuarioRequest){
-        val usuario = usuarioMapper.criarUsuario(request)
-        val usuarioCopy = usuario.copy(
-
-            roles = setOf(Role.USUARIO),
-            senha = passwordEncoder.encode(usuario.senha)
-        )
-
-        usuarioRepository.save(usuarioCopy)
+    fun criar(request: PostUsuarioRequest) {
+        usuarioMapper.criarUsuario(request)
+            .let { usuario ->
+                usuario.copy(
+                    roles = setOf(Role.USUARIO),
+                    senha = passwordEncoder.encode(usuario.senha)
+                )
+            }
+            .also(usuarioRepository::save)
     }
 
     fun atualizar(id: Int, request: PutUsuarioRequest){
