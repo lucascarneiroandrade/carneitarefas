@@ -1,12 +1,18 @@
 
 # Carneitarefas
 
-Backend de gerenciamento de tarefas, com listagem no estilo Kanban, desenvolvido com Spring Boot + Kotlin, utilizando MySQL em Docker e Makefile para padronizar o fluxo de desenvolvimento local.
+Backend para gerenciamento de tarefas com visualização no estilo **Kanban**, desenvolvido com **Spring Boot + Kotlin**, utilizando **MySQL em Docker** e **Makefile** para padronizar o fluxo de desenvolvimento local.
 
-## Tecnologias Utilizadas
+---
+
+## 🚀 Tecnologias Utilizadas
 
 - Kotlin
-- Spring Boot 3.4.1 (Web, Data JPA, Security, Validation)
+- Spring Boot 3.4.1
+    - Web
+    - Data JPA
+    - Security
+    - Validation
 - Hibernate / JPA
 - MySQL 8
 - Flyway
@@ -15,8 +21,31 @@ Backend de gerenciamento de tarefas, com listagem no estilo Kanban, desenvolvido
 - JUnit
 - MockK
 
+---
 
+## 📋 Requisitos
 
+### Gerais
+- Java 21 (JDK)
+- Docker
+- Make
+
+### Por sistema operacional
+
+#### 🪟 Windows
+- Docker Desktop
+- Git Bash ou WSL2
+
+#### 🐧 Linux
+- Docker Engine
+- Docker Compose
+- `make`
+
+#### 🍎 macOS
+- Docker Desktop
+- Xcode Command Line Tools (`xcode-select --install`)
+
+---
 
 #### Rodar a aplicação:
 
