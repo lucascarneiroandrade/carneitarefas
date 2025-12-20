@@ -203,6 +203,49 @@ class TarefaServiceTest {
         }
     }
 
+    @Test
+    fun `deve lancar NotFoundException quando algum id informado for invalido`() {
+
+        val usuario = criarUsuarioTeste(id = 1)
+
+        val tarefaExistente = criarTarefaTeste(
+            id = 1,
+            status = TarefaStatus.A_FAZER,
+            usuario = usuario
+        )
+
+        val request = listOf(
+            PatchStatusTarefaItemRequest(id = 1, status = TarefaStatus.FEITO),
+            PatchStatusTarefaItemRequest(id = 2, status = TarefaStatus.EM_ANDAMENTO)
+        )
+
+        every { usuarioService.buscaUsuarioLogado() } returns usuario
+        every { tarefaRepository.findAllById(setOf(1, 2)) } returns listOf(tarefaExistente)
+
+        val exception = assertThrows(NotFoundException::class.java) {
+            tarefaService.atualizarStatusEmLote(request)
+        }
+
+        assertEquals(
+            Errors.TRFS001.message,
+            exception.message
+        )
+
+        assertEquals(
+            Errors.TRFS001.code,
+            exception.errorCode
+        )
+
+        verify(exactly = 1) {
+            usuarioService.buscaUsuarioLogado()
+            tarefaRepository.findAllById(setOf(1, 2))
+        }
+
+        verify(exactly = 0) {
+            tarefaRepository.saveAll(any<Iterable<Tarefa>>())
+        }
+    }
+
 
 
 }
