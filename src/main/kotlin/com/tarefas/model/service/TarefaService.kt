@@ -4,6 +4,7 @@ import com.tarefas.controller.request.PatchStatusTarefaItemRequest
 import com.tarefas.controller.request.PostTarefaRequest
 import com.tarefas.controller.response.GetTabelaTarefaResponse
 import com.tarefas.model.entity.Tarefa
+import com.tarefas.model.entity.Usuario
 import com.tarefas.model.enums.Errors
 import com.tarefas.model.enums.TarefaStatus
 import com.tarefas.model.exception.NotFoundException
@@ -61,13 +62,16 @@ class TarefaService(
 
     fun deletar(id: Int) {
         val tarefa = listarPorId(id)
-        validarPermissao(tarefa)
+        val usuario = usuarioService.buscaUsuarioLogado()
+        validarPermissao(tarefa, usuario)
         tarefaRepository.delete(tarefa)
 
     }
 
     @Transactional
     fun atualizarStatusEmLote(request: List<PatchStatusTarefaItemRequest>) {
+
+        val usuarioLogado = usuarioService.buscaUsuarioLogado()
 
         val ids = request.map { it.id }.toSet()
         val tarefas = tarefaRepository.findAllById(ids).toList()
@@ -83,7 +87,7 @@ class TarefaService(
         val statusPorId = request.associate { it.id to it.status }
 
         tarefas.forEach { tarefa ->
-            validarPermissao(tarefa)
+            validarPermissao(tarefa, usuarioLogado)
 
             tarefa.apply {
                 status = statusPorId[id]!!
@@ -93,9 +97,7 @@ class TarefaService(
         tarefaRepository.saveAll(tarefas)
     }
 
-    private fun validarPermissao(tarefa: Tarefa) {
-        val usuarioLogado = usuarioService.buscaUsuarioLogado()
-
+    private fun validarPermissao(tarefa: Tarefa, usuarioLogado: Usuario) {
         if (tarefa.usuarioId != usuarioLogado) {
             throw NotPermittedException(
                 message = Errors.TRFS031.message,
