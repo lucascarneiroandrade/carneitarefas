@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class UsuarioService(
-    private var usuarioRepository: UsuarioRepository,
-    private var usuarioMapper: UsuarioMapper,
+    private val usuarioRepository: UsuarioRepository,
+    private val usuarioMapper: UsuarioMapper,
     private val passwordEncoder: PasswordEncoder
 ) {
 
