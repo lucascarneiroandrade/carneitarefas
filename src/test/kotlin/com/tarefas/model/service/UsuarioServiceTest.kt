@@ -2,20 +2,16 @@ package com.tarefas.model.service
 
 import com.tarefas.controller.request.PostUsuarioRequest
 import com.tarefas.controller.request.PutUsuarioRequest
-import com.tarefas.model.entity.Usuario
 import com.tarefas.model.enums.Errors
 import com.tarefas.model.enums.Role
 import com.tarefas.model.exception.NotFoundException
+import com.tarefas.model.helper.criarUsuarioTeste
 import com.tarefas.model.mapper.UsuarioMapper
 import com.tarefas.model.repository.UsuarioRepository
 import com.tarefas.model.util.SecurityUtils
-import io.mockk.every
+import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
-import io.mockk.mockk
-import io.mockk.mockkObject
-import io.mockk.unmockkAll
-import io.mockk.verify
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
@@ -67,6 +63,7 @@ class UsuarioServiceTest {
                 it.senha == "senhaHash" && it.roles.contains(Role.USUARIO)
             })
         } returns usuarioCriptografado
+
         usuarioService.criar(request)
 
         verify (exactly = 1) {
@@ -177,17 +174,4 @@ class UsuarioServiceTest {
             usuarioRepository.findById(id)
         }
     }
-
-    fun criarUsuarioTeste(
-        id: Int? = null,
-        nome: String = "Nome Usuário Teste",
-        email: String = "${UUID.randomUUID()}@email.com",
-        senha: String = "123teste"
-    ) = Usuario(
-        id = id,
-        nome = nome,
-        email = email,
-        senha = senha,
-        roles = setOf(Role.USUARIO)
-    )
 }

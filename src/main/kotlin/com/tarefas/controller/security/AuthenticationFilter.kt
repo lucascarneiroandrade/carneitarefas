@@ -16,19 +16,29 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 class AuthenticationFilter(
     private val usuarioRepository: UsuarioRepository,
     private val jwtUtil: JwtUtil
-): UsernamePasswordAuthenticationFilter() {
+) : UsernamePasswordAuthenticationFilter() {
 
     override fun attemptAuthentication(request: HttpServletRequest, response: HttpServletResponse): Authentication {
 
         try {
-            val loginRequest = jacksonObjectMapper().readValue(request.inputStream, LoginRequest::class.java)
-            val id = usuarioRepository.findByEmail(loginRequest.email)?.id
+            val loginRequest =
+                jacksonObjectMapper().readValue(request.inputStream, LoginRequest::class.java)
+
+            val usuario = usuarioRepository.findByEmail(loginRequest.email)
+                ?: throw AuthenticationException(
+                    message = Errors.TRFS032.message,
+                    errorCode = Errors.TRFS032.code
+                )
             val authToken = UsernamePasswordAuthenticationToken(
-                id,
+                usuario.id,
                 loginRequest.senha
             )
             return authenticationManager.authenticate(authToken)
+
+        } catch (ex: AuthenticationException) {
+            throw ex
         } catch (ex: Exception) {
+            logger.error("Erro inesperado durante autenticação", ex)
             throw AuthenticationException(Errors.TRFS032.message, Errors.TRFS032.code)
         }
     }

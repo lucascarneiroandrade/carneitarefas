@@ -4,6 +4,7 @@ plugins {
 	id("org.springframework.boot") version "3.4.1"
 	id("io.spring.dependency-management") version "1.1.5"
 	kotlin("plugin.jpa") version "2.2.21"
+    jacoco
 }
 
 group = "com.tarefas"
