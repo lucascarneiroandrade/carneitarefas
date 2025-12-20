@@ -4,6 +4,7 @@ plugins {
 	id("org.springframework.boot") version "3.4.1"
 	id("io.spring.dependency-management") version "1.1.5"
 	kotlin("plugin.jpa") version "2.2.21"
+    jacoco
 }
 
 group = "com.tarefas"
@@ -37,6 +38,7 @@ dependencies {
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testImplementation("io.mockk:mockk:1.14.7")
 
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }

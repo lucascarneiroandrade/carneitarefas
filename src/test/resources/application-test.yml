@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: test
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/tarefastest?createDatabaseIfNotExist=true
+    username: root
+    password: root
+  jackson:
+    default-property-inclusion: non_null
+
+jwt:
+  secret: 2fa91b64-b2d2-440c-ad7c-b5f4a10ddac2
+  expiration: 3600000

@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: tarefas-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tarefas
+      MYSQL_USER: usuario
+      MYSQL_PASSWORD: senha
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+
+  app:
+    build: .
+    container_name: tarefas-api
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/tarefas
+      SPRING_DATASOURCE_USERNAME: tarefas
+      SPRING_DATASOURCE_PASSWORD: tarefas
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:

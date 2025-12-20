@@ -8,5 +8,6 @@ enum class Errors(val code: String, val message: String) {
     TRFS030("TRFS-030", "Usuário não autorizado!"),
     TRFS031("TRFS-031", "Acesso negado!"),
     TRFS032("TRFS-032", "Falha ao se autenticar!"),
-    TRFS033("TRFS-033", "Usuário não encontrado")
+    TRFS033("TRFS-033", "Usuário não encontrado"),
+    TRFS034("TRFS-034", "Token Inválido")
 }
