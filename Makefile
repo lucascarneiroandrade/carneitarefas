@@ -9,7 +9,7 @@ mysql:
 	docker-compose up -d $(MYSQL_SERVICE)
 
 build:
-	./gradlew clean build -x test
+	./gradlew clean build
 
 run:
 	java -jar $(JAR) --spring.profiles.active=$(PROFILE)
