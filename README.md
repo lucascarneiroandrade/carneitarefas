@@ -30,3 +30,6 @@ make up
 make down
 ```
 
+## 🧪 Collection
+
+O projeto possui uma collection do **Bruno** para testes da API, disponível na pasta `collection`.
