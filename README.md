@@ -41,7 +41,7 @@ Backend para gerenciamento de tarefas com visualização no estilo **Kanban**, d
 - Make
 
 #### 🍎 macOS
-- Docker(Colima ou Docker Desktop)
+- Docker (Colima ou Docker Desktop)
 - Xcode Command Line Tools
 
 ---
