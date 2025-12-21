@@ -37,13 +37,12 @@ Backend para gerenciamento de tarefas com visualização no estilo **Kanban**, d
 - Git Bash ou WSL2
 
 #### 🐧 Linux
-- Docker Engine
-- Docker Compose
-- `make`
+- Docker (Engine + Compose v2)
+- Make
 
 #### 🍎 macOS
-- Docker Desktop
-- Xcode Command Line Tools (`xcode-select --install`)
+- Docker(Colima ou Docker Desktop)
+- Xcode Command Line Tools
 
 ---
 
