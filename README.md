@@ -59,6 +59,18 @@ make up
 make down
 ```
 
+## 🔐 Configuração do Banco de Dados
+
+A aplicação utiliza um banco de dados **MySQL**, configurado para o ambiente Docker.
+
+### Credenciais padrão (ambiente local)
+
+- **Host:** `localhost`
+- **Porta:** `3306`
+- **Database:** `tarefas`
+- **Usuário:** `usuario`
+- **Senha:** `senha`
+
 ## 🧪 Collection
 
 O projeto possui uma collection do **Bruno** para testes da API, disponível na pasta `collection`.
