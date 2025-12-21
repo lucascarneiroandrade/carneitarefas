@@ -47,18 +47,6 @@ Backend para gerenciamento de tarefas com visualização no estilo **Kanban**, d
 
 ---
 
-#### Rodar a aplicação:
-
-```bash
-make up
-```
-
-#### Parar a aplicação:
-
-```bash
-make down
-```
-
 ## 🔐 Configuração do Banco de Dados
 
 A aplicação utiliza um banco de dados **MySQL**, configurado para o ambiente Docker.
@@ -70,6 +58,24 @@ A aplicação utiliza um banco de dados **MySQL**, configurado para o ambiente D
 - **Database:** `tarefas`
 - **Usuário:** `usuario`
 - **Senha:** `senha`
+
+---
+
+
+## Rodar a aplicação:
+
+```bash
+make up
+```
+
+## Parar a aplicação:
+
+```bash
+make down
+```
+
+---
+
 
 ## 🧪 Collection
 
