@@ -10,7 +10,7 @@ MYSQL_SERVICE := mysql
 ifeq ($(OS),Windows_NT)
 	SHELL := bash
 	GRADLEW := gradlew.bat
-	JAVA_CHECK := where java >nul 2>&1
+	JAVA_CHECK := command -v java >/dev/null 2>&1
 else
 	GRADLEW := ./gradlew
 	JAVA_CHECK := command -v java >/dev/null 2>&1
